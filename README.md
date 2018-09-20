@@ -9,7 +9,7 @@ git clone https://github.com/baoxingsong/MSA2pi.git
 cd MSA2pi
 ant
 ````
-You will get MSA2pi.jar under folder `dist`
+You will get MSA2pi.jar
 
 
 
@@ -17,9 +17,9 @@ You will get MSA2pi.jar under folder `dist`
 ````
 java -jar MSA2pi.jar -i inputFile [-r reference sequence name]
 
-The input file should be in multiple fasta format and aligned with multiple sequnce alignment application.
+The input file should be in multiple fasta format and aligned with multiple sequence alignment application.
 
-If your sequence used wide IUPAC code (https://www.bioinformatics.org/sms/iupac.html) and the reference sequence name is assighed in the parameter, those ambiguous letters could be changed to the reference letter at the same positon. If the reference sequence name is no assighed, the ambiguous letters would be treated in the same way with INDEL (-).
+If your sequence used wide IUPAC code (https://www.bioinformatics.org/sms/iupac.html) and the reference sequence name is assigned in the parameter, those ambiguous letters could be changed to the reference letter at the same position. If the reference sequence name is no assigned, the ambiguous letters would be treated in the same way with INDEL (-).
 ````
 
 

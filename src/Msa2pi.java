@@ -6,12 +6,13 @@ import org.apache.commons.cli.PosixParser;
 
 import me.songbx.service.ChromoSomeReadService;
 
+
 /**
  * @author song
  * @version 1.0, 2018-09-20
  */
 
-public class Main {
+public class Msa2pi {
 
 	/**
 	 * @param args
