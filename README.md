@@ -19,16 +19,23 @@ java -jar MSA2pi.jar -i inputFile [-r reference sequence name]
 
 The input file should be in multiple fasta format and aligned with multiple sequence alignment application.
 
-If your sequence used wide IUPAC code (https://www.bioinformatics.org/sms/iupac.html) and the reference sequence name is assigned in the parameter, those ambiguous letters could be changed to the reference letter at the same position. If the reference sequence name is no assigned, the ambiguous letters would be treated in the same way with INDEL (-).
+If your sequence used wide IUPAC code (https://www.bioinformatics.org/sms/iupac.html) 
+and the reference sequence name is assigned in the parameter, 
+those ambiguous letters could be changed to the reference letter at the same position. 
+If the reference sequence name is no assigned, the ambiguous letters would be treated 
+in the same way with INDEL (-).
 ````
 
 
 
 ## Motivation
 
-Nucleotide diversity, $\pi$ was defined as, the average number of nucleotide differences per site between two sequences. And it is a widely used measure for sequence conservation.
+Nucleotide diversity, π, was defined as, the average number of nucleotide differences per site between two sequences. And it is a widely used measure for sequence conservation.
 
-As the accumulation of our knowledge, we find it is controversial to calculate π value for INDELs. If there are INDELs with positive overlap with each other, since we do not know the evolution process, it is not convincing to take each INDEL as a single variant. If we take the INDEL as missing value, and divide the total number of variants by the total sequence length, there would be bias. Since $\frac {length\times n \times (n-1)}{2}​$ times of comparison have not been performed. And I did not find detailed document about how to deal with INDELs for $\pi​$ value calculation, I decide to write this simple.
+As the accumulation of our knowledge, we find it is controversial to calculate π value for INDELs. If there are INDELs with positive overlap with each other, since we do not know the evolution process, it is not convincing to take each INDEL as a single variant. If we take the INDEL as missing value, and divide the total number of variants by the total sequence length, there would be bias. Since sequence_length\*n\*(n-1)/2 times of comparison have not been performed. And I did not find detailed document about how to deal with INDELs for π value calculation, I decide to write this simple application.
 
-For the comparison of a pair of sequences, sequence i and sequence j (j>i), MSA2 calculates two values, 1) the number of base pairs without missing value for both sequences; 2) the number of SNPs. And I defined a temporary value P as (the number of SNPs)/(the number of base pairs without missing value for both sequences). For n sequences  $\pi=\sum \frac{P_{i,j}}{\frac{n*(n-1)}{2}}$.
+For the comparison of a pair of sequences, sequence i and sequence j (j>i), MSA2pi calculates two values, 1) the number of base pairs without missing value for both sequences; 2) the number of SNPs. And I defined a temporary value P<sub>i,j</sub> as (the number of SNPs)/(the number of base pairs without missing value for both sequences). For n sequences and 1<=i<n, 1<j<=n we have:
+
+π=sum(P<sub>i,j</sub>)/(n*(n-1)/2)
+
 
