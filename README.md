@@ -32,10 +32,11 @@ in the same way with INDEL (-).
 
 Nucleotide diversity, π, was defined as, the average number of nucleotide differences per site between two sequences. And it is a widely used measure for sequence conservation.
 
-As the accumulation of our knowledge, we find it is controversial to calculate π value for INDELs. If there are INDELs with positive overlap with each other, since we do not know the evolution process, it is not convincing to take each INDEL as a single variant. If we take the INDEL as missing value, and divide the total number of variants by the total sequence length, there would be bias. Since sequence_length\*n\*(n-1)/2 times of comparison have not been performed. And I did not find detailed document about how to deal with INDELs for π value calculation, I decide to write this simple application.
+As the accumulation of our knowledge, we find it is controversial to calculate π value for INDELs. Especially when there are INDELs with positive overlap with each other, since we do not know the evolution process, it is not convincing to take each INDEL as a single variant. If we take the INDEL as missing value, and divide the total number of variants by the total sequence length, there would be bias. Since sequence_length\*n\*(n-1)/2 times of comparison have not been performed. And I did not find available application with detailed document about how to deal with INDELs for π value calculation, I decide to write this simple application.
 
-For the comparison of a pair of sequences, sequence i and sequence j (j>i), MSA2pi calculates two values, 1) the number of base pairs without missing value for both sequences; 2) the number of SNPs. And I defined a temporary value P<sub>i,j</sub> as (the number of SNPs)/(the number of base pairs without missing value for both sequences). For n sequences and 1<=i<n, 1<j<=n we have:
+For n sequences with length l, 1<=i<=l, we calculate total number of pair-wised variants at position i. We have the allele frequency f<sub>a,i</sub> for the allele a and total number of accession with no INDEL at position i, m<sub>i</sub>. Then P<sub>i</sub>=sum(f<sub>a,i</sub>\*(m<sub>i</sub>-f<sub>a,i</sub>)/2), N<sub>i</sub>=m<sub>i</sub>*(m<sub>i</sub>-1)/2. And
+P=sum(P<sub>i</sub>), N=sum(N<sub>i</sub>).
 
-π=sum(P<sub>i,j</sub>)/(n*(n-1)/2)
+π=P/N
 
 
