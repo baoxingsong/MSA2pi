@@ -21,6 +21,7 @@ public class Msa2pi {
 		Options options = new Options();
 		options.addOption("i",true,"inputfile");
         options.addOption("r",true,"reference");
+        options.addOption("p", false, "proteinSequence");
         CommandLineParser parser = new PosixParser();
         CommandLine cmd=null;
         try {
@@ -34,8 +35,10 @@ public class Msa2pi {
         
         StringBuffer helpMessage=new StringBuffer("caculate pi value file from multiple sequence alignment fasta file\nArguments:\n");
         helpMessage.append("\t-i inputfile, The path of the input file in fasta format.\n");
-        helpMessage.append("\t-r reference sequence name [optional]\n"); 
+        helpMessage.append("\t-r reference sequence name [optional]\n");
+        helpMessage.append("\t-p the input is protein sequence [DNA]\n"); 
         helpMessage.append("\t-h show this message");
+        helpMessage.append("if -p is set, -r would not be used\n");
         helpMessage.append("if reference is avaliable, all the IUPAC code other than A,T,U,C,G,- could be changed to the reference allele\n");
         helpMessage.append("if reference is not avaliable, all the IUPAC code other than A,T,U,C,G,- could be changed to '-'\n");
         
@@ -50,11 +53,15 @@ public class Msa2pi {
         }
         String inputFile = cmd.getOptionValue("i");
         ChromoSomeReadService chromoSomeReadService = new ChromoSomeReadService(inputFile);
-        if(cmd.hasOption("r") ){
-        	String reference = cmd.getOptionValue("r");
-        	DiversityChecking.calPi(  chromoSomeReadService, reference);
+        if(cmd.hasOption("p") ){
+        	DiversityChecking.calProteinPi(  chromoSomeReadService);
         }else {
-        	DiversityChecking.calPi(  chromoSomeReadService);
+	        if(cmd.hasOption("r") ){
+	        	String reference = cmd.getOptionValue("r");
+	        	DiversityChecking.calPi(  chromoSomeReadService, reference);
+	        }else {
+	        	DiversityChecking.calPi(  chromoSomeReadService);
+	        }
         }
 	}
 }

@@ -19,7 +19,7 @@ java -jar MSA2pi.jar -i inputFile [-r reference sequence name]
 
 The input file should be in multiple fasta format and aligned with multiple sequence alignment application.
 
-If your sequence used wide IUPAC code (https://www.bioinformatics.org/sms/iupac.html) 
+For DNA sequence, if your sequence used wide IUPAC code (https://www.bioinformatics.org/sms/iupac.html) 
 and the reference sequence name is assigned in the parameter, 
 those ambiguous letters could be changed to the reference letter at the same position. 
 If the reference sequence name is no assigned, the ambiguous letters would be treated 
